@@ -1,6 +1,10 @@
-# Título do projeto
+# Esporte na Universidade
 
-Um parágrafo da descrição do projeto vai aqui
+Este projeto surge como resposta aos desafios crescentes relacionados à saúde na sociedade contemporânea, incluindo o sedentarismo, maus hábitos alimentares e estresse, fatores que contribuem para o aumento das doenças crônicas. Com a urgência de adotar estratégias eficazes de promoção da saúde, a iniciativa propõe o desenvolvimento de um programa abrangente de coleta de dados em educação física, focado na antropometria e aptidão física, para o LACAPS (Laboratório de Cineantropometria, Atividade Física e Promoção de Saúde).
+
+
+O projeto reconhece a importância de abordagens holísticas que consideram não apenas o bem-estar individual, mas também o impacto ambiental das práticas adotadas. Nesse sentido, busca preencher essa lacuna ao integrar inovações que unem a promoção da saúde à responsabilidade ambiental, incorporando práticas sustentáveis para reduzir significativamente o consumo de papel durante a coleta e análise de dados.
+
 
 ## 🚀 Começando
 
@@ -18,82 +22,34 @@ Dar exemplos
 
 ### 🔧 Instalação
 
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
+#### Front-End
 
-Diga como essa etapa será:
-
-```
-Dar exemplos
-```
-
-E repita:
+Para executar o front-end é necessário ter o npm instalado, você pode verificar se o tem através de:
 
 ```
-Até finalizar
+npm -v
 ```
-
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
-
-## ⚙️ Executando os testes
-
-Explicar como executar os testes automatizados para este sistema.
-
-### 🔩 Analise os testes de ponta a ponta
-
-Explique que eles verificam esses testes e porquê.
+Estando com o projeto aberto, acesse a pasta webapp, e execute o comando:
 
 ```
-Dar exemplos
+npm start
 ```
-
-### ⌨️ E testes de estilo de codificação
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
-
-## 📦 Implantação
-
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
+Com ele será possível visualizar a tela inicial do projeto, que ainda será desenvolvida com o design.
 
 ## 🛠️ Construído com
 
-Mencione as ferramentas que você usou para criar seu projeto
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
-* [Maven](https://maven.apache.org/) - Gerente de Dependência
-* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
-
-## 🖇️ Colaborando
-
-Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
+* [ReactJS](https://react.dev/) - O framework web usado
 
 ## 📌 Versão
 
-Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/suas/tags/do/projeto). 
+Em desenvolvimento. 
 
 ## ✒️ Autores
 
-Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
-
-* **Um desenvolvedor** - *Trabalho Inicial* - [umdesenvolvedor](https://github.com/linkParaPerfil)
-* **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
-
-Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
+* **Barbara de Lima** - [@BarbLim](https://github.com/BarbLim)
+* **Jucyelle Barros do Nascimento** - [@Jucyelle](https://github.com/Jucyelle)
+* **Maria Luiza Correia Oliveira Lima** - [@luizaOliv](https://github.com/luizaOliv)
 
 ## 📄 Licença
 
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
-
-## 🎁 Expressões de gratidão
-
-* Conte a outras pessoas sobre este projeto 📢;
-* Convide alguém da equipe para uma cerveja 🍺;
-* Um agradecimento publicamente 🫂;
-* etc.
-
-
----
-⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+Este projeto pertence a Universidade Federal de Alagoas - Campus Arapiraca. 
