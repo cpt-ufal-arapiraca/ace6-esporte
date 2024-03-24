@@ -32,13 +32,19 @@ npm -v
 Estando com o projeto aberto, acesse a pasta webapp, e execute o comando:
 
 ```
+npm install
+```
+Com ele será possível instalar os pacotes necessários, e em seguida:
+
+```
 npm start
 ```
-Com ele será possível visualizar a tela inicial do projeto, que ainda será desenvolvida com o design.
+Que iniciará o projeto na tela inicial, ainda em desenvolvimento. Porém, é possível já visualizar a tela de login, adicionando um "/login" ao final do caminho localhost (http://localhost:3000/login).
 
 ## 🛠️ Construído com
 
 * [ReactJS](https://react.dev/) - O framework web usado
+* [AntDesign](https://ant.design/) - Biblioteca de componentes UI baseada no React
 
 ## 📌 Versão
 
