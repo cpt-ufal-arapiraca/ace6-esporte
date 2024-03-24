@@ -1,0 +1,34 @@
+.generalPage {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.templateAside {
+    background-color: #0095DA;
+    flex: 2;
+}
+
+.loginForm {
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formContainer {
+    width: 323px;
+    height: auto;
+}
+
+#title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #333333;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+.linkHref {
+    color: rgba(0, 0, 0, 0.88);
+    text-decoration: underline;
+}

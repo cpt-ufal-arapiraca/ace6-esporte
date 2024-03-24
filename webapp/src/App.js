@@ -1,14 +1,19 @@
 import './App.css';
+import RoutesPaths from './Routes';
+import { ConfigProvider } from 'antd';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Página a ser desenvolvida.
-        </p>
-      </header>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#0095DA',
+          fontFamily: 'Inter',
+        },
+      }}
+    >
+      <RoutesPaths />
+    </ConfigProvider>
   );
 }
 
