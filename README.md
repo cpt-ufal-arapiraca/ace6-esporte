@@ -22,6 +22,19 @@ Dar exemplos
 
 ### 🔧 Instalação
 
+#### Back-End
+
+Para executar o back-end é necessário ter o uvicorn instalado, você pode verificar se o tem através de:
+
+```
+uvicorn --version
+```
+Estando com o projeto aberto, execute o servidor com o comando abaixo:
+
+```
+python -m uvicorn server.main:app --reload
+```
+
 #### Front-End
 
 Para executar o front-end é necessário ter o npm instalado, você pode verificar se o tem através de:
@@ -43,8 +56,11 @@ Que iniciará o projeto na tela inicial, ainda em desenvolvimento. Porém, é po
 
 ## 🛠️ Construído com
 
-* [ReactJS](https://react.dev/) - O framework web usado
-* [AntDesign](https://ant.design/) - Biblioteca de componentes UI baseada no React
+* [AntDesign](https://ant.design/) - Biblioteca de componentes UI baseada no React que oferece uma ampla gama de elementos de interface prontos para uso.
+* [FastAPI](https://fastapi.tiangolo.com/) - Framework moderno e rápido para construir APIs com Python.
+* [Python](https://www.python.org/) - Linguagem de programação de alto nível que é conhecida pela sua simplicidade e legibilidade.
+* [ReactJS](https://react.dev/) - Framework JavaScript para criar interfaces de usuário interativas e componentes reutilizáveis.
+* [SQLite3](https://www.sqlite.org/index.html) - Sistema de gerenciamento de banco de dados.
 
 ## 📌 Versão
 
