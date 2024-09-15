@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from 'react';
-import './home.css';
 import { Watermark } from 'antd';
 
 const Home = () => {
