@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import { Result, Button } from 'antd';
 
-import Home from './pages/home'
-import Login from './pages/login';
+import Home from '../pages/Home'
+import Login from '../pages/Login';
 
 const NotFound = () => {
     const navigate = useNavigate();
