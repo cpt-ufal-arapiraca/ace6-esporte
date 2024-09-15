@@ -1,7 +1,7 @@
 import React from 'react';
-import './login.css';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Flex, Form, Input } from 'antd';
+import './styles.css';
 
 const Login = () => {
     const onFinish = (values) => {
