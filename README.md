@@ -42,7 +42,7 @@ Para executar o front-end é necessário ter o npm instalado, você pode verific
 ```
 npm -v
 ```
-Estando com o projeto aberto, acesse a pasta webapp, e execute o comando:
+Estando com o projeto aberto, acesse a pasta web, e execute o comando:
 
 ```
 npm install
@@ -50,7 +50,7 @@ npm install
 Com ele será possível instalar os pacotes necessários, e em seguida:
 
 ```
-npm start
+npm run dev
 ```
 Que iniciará o projeto na tela inicial, ainda em desenvolvimento. Porém, é possível já visualizar a tela de login, adicionando um "/login" ao final do caminho localhost (http://localhost:3000/login).
 
