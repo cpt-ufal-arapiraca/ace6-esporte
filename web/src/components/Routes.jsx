@@ -9,6 +9,7 @@ import { Result, Button } from 'antd';
 
 import Home from '../pages/Home'
 import Login from '../pages/Login';
+import Register from '../pages/Register';
 
 const NotFound = () => {
     const navigate = useNavigate();
@@ -30,6 +31,7 @@ const RoutesPaths = () => (
         <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/login" element={<Login />}/>
+            <Route path="/registrar" element={<Register />}/>
             <Route path="*" element={<NotFound />} />
         </Routes>
     </Router>

@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Flex, Form, Input } from 'antd';
+import { Button, Checkbox, Flex, Form, Input, Modal } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 
 const Login = () => {
+    const [modalForgotPasswordOpen, setModalForgotPasswordOpen] = useState(false);
+    const navigate = useNavigate();
+
     const onFinish = (values) => {
         console.log('Valores do login-form: ', values);
-      };
+    };
+
+    const handleRegisterNavigate = () => {
+        navigate('/registrar');
+    };
 
     return (
         <main>
@@ -16,7 +24,7 @@ const Login = () => {
                 </div>
                 <div className='loginForm'>
                     <div className='formContainer'>
-                        <p id='title'>Login</p>
+                        <p id='loginTitle'>Login</p>
                         <Form
                         name="normal_login"
                         className="login-form"
@@ -31,17 +39,17 @@ const Login = () => {
                             rules={[
                                 {
                                     type: 'email',
-                                    message: 'O email não é válido.',
+                                    message: 'O e-mail não é válido.',
                                 },
                                 {
                                     required: true,
-                                    message: 'Por favor, insira seu email.',
+                                    message: 'Por favor, insira seu e-mail.',
                                 },
                             ]}
                         >
                             <Input
                                 prefix={<UserOutlined className="site-form-item-icon" />} 
-                                placeholder="Email" 
+                                placeholder="E-mail" 
                             />
                         </Form.Item>
                         <Form.Item
@@ -63,14 +71,39 @@ const Login = () => {
                                 marginBottom: 0
                             }}
                         >
-                            <Flex justify='space-between' align='center'>
+                            <Flex className='rememberMe' justify='space-between' align='center'>
                                 <Form.Item name="remember" valuePropName="checked" noStyle>
                                     <Checkbox>Lembrar de mim</Checkbox>
                                 </Form.Item>
 
-                                <a className="linkHref" href="">
+                                <Button
+                                    type="link"
+                                    size='small'
+                                    onClick={() => setModalForgotPasswordOpen(true)}
+                                >
                                     Esqueceu a senha?
-                                </a>
+                                </Button>
+                                <Modal
+                                    className='modalForgotPassword'
+                                    centered
+                                    open={modalForgotPasswordOpen}
+                                    footer={[
+                                        <Button size='large' key="submit" type="primary">
+                                            Solicitar nova senha
+                                        </Button>
+                                    ]}
+                                    onCancel={() => setModalForgotPasswordOpen(false)}
+                                >
+                                    <div className="modal-header">
+                                        <div className="icon-container">
+                                            <div className='circle'>
+                                                <LockOutlined className="lock-icon" />
+                                            </div>
+                                        </div>
+                                        <h2 className="modal-title">Esqueceu a senha?</h2>
+                                    </div>
+                                    <p>Não se preocupe! Clique no botão abaixo para solicitar uma nova senha.</p>
+                                </Modal>
                             </Flex>
                         </Form.Item>
 
@@ -85,10 +118,18 @@ const Login = () => {
                                 className="login-form-button"
                                 block
                             >
-                            Entrar
+                                Entrar
                             </Button>
-                            <p style={{textAlign: 'center', marginTop: 5, marginBottom: 5}}>
-                                Não tem uma conta? <a className="linkHref" href="">Registre-se aqui</a>.
+
+                            <p className='registrationOption' style={{textAlign: 'center', marginTop: 5, marginBottom: 5}}>
+                                <b>Não tem uma conta?</b>
+                                <Button
+                                    type="link"
+                                    size="small"
+                                    onClick={handleRegisterNavigate}
+                                >
+                                    Registre-se aqui.
+                                </Button>
                             </p>
                         </Form.Item>
                         </Form>
