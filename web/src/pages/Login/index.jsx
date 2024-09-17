@@ -1,15 +1,35 @@
 import React, { useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Flex, Form, Input, Modal } from 'antd';
+import { Button, Checkbox, Flex, Form, Input, Modal, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../../services/api';
 import './styles.css';
 
 const Login = () => {
     const [modalForgotPasswordOpen, setModalForgotPasswordOpen] = useState(false);
+    const [messageApi, contextHolder] = message.useMessage();
     const navigate = useNavigate();
 
-    const onFinish = (values) => {
-        console.log('Valores do login-form: ', values);
+    const onFinish = async (values) => {
+        try {
+            const result = await login(values.email, values.password);
+            console.log(result)
+            if (result.status === 200) {
+                localStorage.setItem('authToken', result.data.access_token);
+
+                messageApi.open({
+                    type: 'success',
+                    content: 'Login realizado com sucesso!',
+                });
+
+                window.location.href = '/';
+            }
+        } catch (error) {
+            messageApi.open({
+                type: 'error',
+                content: error.message,
+            });
+        }
     };
 
     const handleRegisterNavigate = () => {
@@ -23,6 +43,7 @@ const Login = () => {
                     {/* inserir a imagem e logo */}
                 </div>
                 <div className='loginForm'>
+                    {contextHolder}
                     <div className='formContainer'>
                         <p id='loginTitle'>Login</p>
                         <Form

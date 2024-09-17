@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { Result, Button } from 'antd';
 
+import PrivateRoute from './PrivateRoute';
 import Home from '../pages/Home'
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -29,7 +30,7 @@ const NotFound = () => {
 const RoutesPaths = () => (
     <Router>
         <Routes>
-            <Route path="/" element={<Home />}/>
+            <Route path="/" element={<PrivateRoute element={Home} />}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/registrar" element={<Register />}/>
             <Route path="*" element={<NotFound />} />
