@@ -1,0 +1,21 @@
+.generalPage {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.templateAside {
+    background-color: #0095DA;
+    flex: 2;
+}
+
+.registerForm {
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerContainer {
+    max-width: 534px;
+}

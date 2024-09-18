@@ -13,3 +13,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#loginTitle, #registerTitle {
+  font-size: 48px;
+  font-weight: 700;
+  color: #333333;
+  margin-top: 0;
+  margin-bottom: 30px;
+}

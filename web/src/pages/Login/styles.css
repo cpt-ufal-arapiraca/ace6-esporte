@@ -21,14 +21,70 @@
     height: auto;
 }
 
-#title {
-    font-size: 48px;
-    font-weight: 700;
-    color: #333333;
-    margin-top: 0;
-    margin-bottom: 30px;
+.rememberMe .ant-btn>span, .registrationOption .ant-btn>span {
+    color: #939393 !important;
+    text-decoration: underline !important;
 }
-.linkHref {
-    color: rgba(0, 0, 0, 0.88);
-    text-decoration: underline;
+
+.rememberMe .ant-checkbox-wrapper {
+    color: #939393 !important;
+}
+
+.modalForgotPassword {
+    width: 363px !important;
+}
+
+.modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: rgb(0, 149, 218, 0.08);
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+}
+
+.circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background-color: rgb(0, 149, 218, 0.18);
+}
+
+.lock-icon {
+    font-size: 30px;
+    color: #092C4C;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0095DA;
+    margin: 0;
+}
+
+.modalForgotPassword p {
+    text-align: center;
+    margin-bottom: 28px;
+    font-size: 16px;
+}
+
+.modalForgotPassword .ant-modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.modalForgotPassword .ant-btn-primary {
+    width: 100%;
 }

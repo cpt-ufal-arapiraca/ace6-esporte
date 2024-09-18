@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 import bcrypt
 
 from ..enums.user_roles import UserRole
@@ -10,9 +11,10 @@ class User:
     name: str
     email: str
     hashed_password: str
-    active: bool
-    role: UserRole
     identity: UserIdentity
+    student_registration: Optional[str] = None
+    role: UserRole = UserRole.USER
+    active: bool = False
 
     @staticmethod
     def hash_password(password: str) -> str:
