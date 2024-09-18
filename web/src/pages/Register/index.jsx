@@ -1,17 +1,40 @@
 import React, { useState } from 'react';
-import { Button, Form, Input, Radio, Row, Col } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Button, Form, Input, Radio, Row, Col, message } from 'antd';
+import { createUser } from '../../../services/api';
 import './styles.css';
 
 const Register = () => {
-    const [valueUserType, setValueUserType] = useState(0); // 0: Professor, 1: Aluno
+    const [form] = Form.useForm();
+    const [valueUserType, setValueUserType] = useState(0);
     const [passwordError, setPasswordError] = useState(null);
+    const [messageApi, contextHolder] = message.useMessage();
+    const navigate = useNavigate();
 
     const onChangeUserType = (e) => {
         setValueUserType(e.target.value);
+        if (e.target.value === 0) {
+            form.setFieldsValue({ student_registration: null });
+        }
     };
 
-    const onFinish = (values) => {
-        console.log('Valores do register-form: ', values);
+    const onFinish = async (values) => {
+        try {
+            const result = await createUser(values.name, values.email, values.password, values.identity, values.student_registration);
+            if (result.status === 201) {
+                messageApi.open({
+                    type: 'success',
+                    content: 'Cadastro realizado com sucesso!',
+                    duration: 3,
+                    onClose: () => navigate('/login'),
+                });
+            }
+        } catch (error) {
+            messageApi.open({
+                type: 'error',
+                content: error.message,
+            });
+        }
     };
 
     const passwordValidator = (_, value) => {
@@ -54,9 +77,11 @@ const Register = () => {
                     {/* inserir a imagem e logo */}
                 </div>
                 <div className='registerForm'>
+                    {contextHolder}
                     <div className='registerContainer'>
                         <p id='registerTitle'>Cadastre-se</p>
                         <Form
+                            form={form}
                             name="register"
                             className="register-form"
                             onFinish={onFinish}
@@ -98,7 +123,7 @@ const Register = () => {
                                 </Col>
                                 <Col span={14}>
                                     <Form.Item
-                                        name="registrationUni"
+                                        name="student_registration"
                                         label="Matrícula"
                                         rules={[
                                             {

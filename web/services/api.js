@@ -44,3 +44,26 @@ export const verifyToken = async (token) => {
         return false;
     }
 }
+
+export const createUser = async (name, email, password, identity, student_registration) => {
+    try {
+        const response = await api.post('register', {
+            name: name,
+            email: email,
+            password: password,
+            identity: identity,
+            student_registration: student_registration
+        });
+        return response;
+    } catch (error) {
+        if (error.response.data.detail === "Student registration already exists") {
+            throw Error('Matrícula já registrada.');
+        }
+        else if (error.response.data.detail === "Email already registered") {
+            throw Error('E-mail em uso.');
+        }
+        else {
+            throw Error('Ocorreu um erro ao fazer o cadastro. Tente novamente.');
+        }
+    }
+}

@@ -13,16 +13,9 @@ const Login = () => {
     const onFinish = async (values) => {
         try {
             const result = await login(values.email, values.password);
-            console.log(result)
             if (result.status === 200) {
                 localStorage.setItem('authToken', result.data.access_token);
-
-                messageApi.open({
-                    type: 'success',
-                    content: 'Login realizado com sucesso!',
-                });
-
-                window.location.href = '/';
+                navigate('/');
             }
         } catch (error) {
             messageApi.open({
