@@ -1,4 +1,5 @@
 import sqlite3
+from typing import Optional
 from server.models.response_models import UserResponse
 from server.enums.user_roles import UserRole
 from server.enums.user_identities import UserIdentity
@@ -46,22 +47,24 @@ class DBConnection:
             name TEXT NOT NULL,
             email TEXT NOT NULL UNIQUE,
             hashed_password TEXT NOT NULL,
-            active BOOLEAN NOT NULL DEFAULT 1,
-            role INTEGER NOT NULL CHECK(role IN (0, 1)),
+            active BOOLEAN NOT NULL DEFAULT 0,
+            role INTEGER NOT NULL DEFAULT 1,
             identity INTEGER NOT NULL CHECK(identity IN (0, 1)),
-            CONSTRAINT users_email_unique UNIQUE (email)
+            student_registration TEXT UNIQUE,
+            CONSTRAINT users_email_unique UNIQUE (email),
+            CONSTRAINT student_registration_unique UNIQUE (student_registration)
         """
     
-    def insert_user(self, name: str, email: str, hashed_password: str, role: UserRole, identity: UserIdentity) -> UserResponse:
+    def insert_user(self, name: str, email: str, hashed_password: str, identity: UserIdentity, student_registration: Optional[str] = None, role: UserRole = UserRole.USER) -> UserResponse:
         cursor = self.db_connection.cursor()
         try:
             print(f"Inserting user: {email}")
             cursor.execute(
                 """
-                INSERT INTO Users(name, email, hashed_password, role, identity)
-                VALUES(?, ?, ?, ?, ?)
+                INSERT INTO Users(name, email, hashed_password, role, identity, student_registration)
+                VALUES(?, ?, ?, ?, ?, ?)
                 """,
-                (name, email, hashed_password, role.value, identity.value)
+                (name, email, hashed_password, role.value, identity.value, student_registration)
             )
             self.db_connection.commit()
             user_id = cursor.lastrowid
@@ -71,12 +74,18 @@ class DBConnection:
                 id=user_id,
                 name=name,
                 email=email,
-                active=True,
+                active=False,
                 role=UserRole(role),
-                identity=UserIdentity(identity)
+                identity=UserIdentity(identity),
+                student_registration=student_registration
             )
-        except sqlite3.IntegrityError:
-            raise ValueError("Email already registered")
+        except sqlite3.IntegrityError as e:
+            if "UNIQUE constraint failed: Users.student_registration" in str(e):
+                raise ValueError("Student registration already exists")
+            elif "UNIQUE constraint failed: Users.email" in str(e):
+                raise ValueError("Email already registered")
+            else:
+                raise ValueError("An error occurred during user insertion")
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
             raise ValueError("An error occurred while inserting the user")
@@ -89,7 +98,7 @@ class DBConnection:
             print("Fetching all users...")
             cursor.execute(
                 """
-                SELECT id, name, email, active, role, identity
+                SELECT id, name, email, active, role, identity, student_registration
                 FROM Users
                 """
             )
@@ -150,5 +159,25 @@ class DBConnection:
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
             raise ValueError("An error occurred while updating the password")
+        finally:
+            cursor.close()
+
+    def update_user_active_status(self, user_id: int, active: bool) -> None:
+        cursor = self.db_connection.cursor()
+        try:
+            cursor.execute(
+                """
+                UPDATE Users
+                SET active = ?
+                WHERE id = ?
+                """,
+                (active, user_id)
+            )
+            if cursor.rowcount == 0:
+                raise ValueError("User not found")
+            self.db_connection.commit()
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            raise ValueError("An error occurred while updating the user's active status")
         finally:
             cursor.close()
