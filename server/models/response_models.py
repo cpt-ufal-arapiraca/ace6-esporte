@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 from pydantic import BaseModel, EmailStr
 
@@ -8,8 +9,9 @@ class UserCreate(BaseModel):
     name: str
     email: EmailStr
     password: str
-    role: UserRole
     identity: UserIdentity
+    student_registration: Optional[str] = None
+    role: UserRole = UserRole.USER
 
 class UserResponse(BaseModel):
     id: int
@@ -18,6 +20,7 @@ class UserResponse(BaseModel):
     active: bool
     role: UserRole
     identity: UserIdentity
+    student_registration: Optional[str] = None
 
 class LoginRequest(BaseModel):
     email: str
@@ -27,3 +30,7 @@ class PasswordUpdateRequest(BaseModel):
     email: str
     new_password: str
     confirm_password: str
+
+class StatusUpdateRequest(BaseModel):
+    id: int
+    active: bool

@@ -7,7 +7,7 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta, timezone
 
 from .models.user import User
-from .models.response_models import UserCreate, UserResponse, LoginRequest, PasswordUpdateRequest
+from .models.response_models import StatusUpdateRequest, UserCreate, UserResponse, LoginRequest, PasswordUpdateRequest
 
 from .enums.user_roles import UserRole
 from .enums.user_identities import UserIdentity
@@ -71,8 +71,9 @@ def register_user(user: UserCreate, response: Response):
             name=user.name,
             email=user.email,
             hashed_password=hashed_password,
-            role=user.role,
-            identity=user.identity
+            identity=user.identity,
+            student_registration=user.student_registration,
+            role=user.role
         )
         return {"detail": "User registered successfully!", "user": created_user}
     except ValueError as e:
@@ -97,7 +98,8 @@ def get_all_users(response: Response):
                 email=row[2],
                 active=bool(row[3]),
                 role=UserRole(row[4]),
-                identity=UserIdentity(row[5])
+                identity=UserIdentity(row[5]),
+                student_registration=row[6]
             )
         )
 
@@ -130,6 +132,15 @@ def reset_password(request: PasswordUpdateRequest, response: Response):
     try:
         db_connection.update_password(request.email, request.new_password)
         return {"detail": "Password updated successfully"}
+    except ValueError as e:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return {"detail": str(e)}
+    
+@app.post("/update-user-status", status_code=status.HTTP_200_OK)
+def reset_password(request: StatusUpdateRequest, response: Response):
+    try:
+        db_connection.update_user_active_status(request.id, request.active)
+        return {"detail": f"User with ID {request.id} updated successfully the activity for {request.active}"}
     except ValueError as e:
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"detail": str(e)}
