@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Flex, Form, Input, Modal, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -7,8 +7,11 @@ import './styles.css';
 
 const Login = () => {
     const [modalForgotPasswordOpen, setModalForgotPasswordOpen] = useState(false);
+    const [modalConfirmOpen, setModalConfirmOpen] = useState(false); // Estado para o segundo modal
+    const [email, setEmail] = useState(''); // Armazenar o email do usuário
+    const [verificationCode, setVerificationCode] = useState(''); // Armazenar o código de verificação
     const [messageApi, contextHolder] = message.useMessage();
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Para navegar entre as páginas
 
     const onFinish = async (values) => {
         try {
@@ -27,6 +30,35 @@ const Login = () => {
 
     const handleRegisterNavigate = () => {
         navigate('/registrar');
+    };
+
+    const handleRequestNewPassword = () => {
+        if (email) {
+            setModalForgotPasswordOpen(false); // Fecha o modal de esquecimento de senha
+            setModalConfirmOpen(true); // Abre o segundo modal de confirmação
+        } else {
+            messageApi.open({
+                type: 'error',
+                content: 'Por favor, insira o e-mail registrado.',
+            });
+        }
+    };
+
+    const handleVerificationSubmit = () => {
+        if (verificationCode) {
+            // Simulando a verificação do código com sucesso
+            messageApi.open({
+                type: 'success',
+                content: 'Código verificado com sucesso!',
+            });
+            setModalConfirmOpen(false); // Fecha o modal de verificação
+            navigate('/recuperar-senha'); // Redireciona para a página de recuperação de senha
+        } else {
+            messageApi.open({
+                type: 'error',
+                content: 'Por favor, insira o código de verificação.',
+            });
+        }
     };
 
     return (
@@ -97,12 +129,14 @@ const Login = () => {
                                 >
                                     Esqueceu a senha?
                                 </Button>
+
+                                {/* Primeiro Modal: Esqueceu a senha */}
                                 <Modal
                                     className='modalForgotPassword'
                                     centered
                                     open={modalForgotPasswordOpen}
                                     footer={[
-                                        <Button size='large' key="submit" type="primary">
+                                        <Button size='large' key="submit" type="primary" onClick={handleRequestNewPassword}>
                                             Solicitar nova senha
                                         </Button>
                                     ]}
@@ -116,7 +150,42 @@ const Login = () => {
                                         </div>
                                         <h2 className="modal-title">Esqueceu a senha?</h2>
                                     </div>
-                                    <p>Não se preocupe! Clique no botão abaixo para solicitar uma nova senha.</p>
+                                    <p>Insira seu e-mail registrado para solicitar uma nova senha.</p>
+                                    <Input
+                                        type="email"
+                                        placeholder="E-mail"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </Modal>
+
+                                {/* Segundo Modal: Insira o código de verificação */}
+                                <Modal
+                                    className='modalConfirmPassword'
+                                    centered
+                                    open={modalConfirmOpen}
+                                    footer={[
+                                        <Button size='large' key="submit" type="primary" onClick={handleVerificationSubmit}>
+                                            Verificar código
+                                        </Button>
+                                    ]}
+                                    onCancel={() => setModalConfirmOpen(false)}
+                                >
+                                    <div className="modal-header">
+                                        <div className="icon-container">
+                                            <div className='circle'>
+                                                <LockOutlined className="lock-icon" />
+                                            </div>
+                                        </div>
+                                        <h2 className="modal-title">Insira o código de verificação</h2>
+                                    </div>
+                                    <p>Digite o código enviado para o seu e-mail.</p>
+                                    <Input
+                                        type="text"
+                                        placeholder="Código de verificação"
+                                        value={verificationCode}
+                                        onChange={(e) => setVerificationCode(e.target.value)}
+                                    />
                                 </Modal>
                             </Flex>
                         </Form.Item>
